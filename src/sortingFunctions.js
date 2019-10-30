@@ -1,4 +1,4 @@
-const numbers = [2,4,7,2,3,0,8,2,4,7,2,2,1,89,22,67,14,90,01,45,73,32,22,33]
+const numbers = [2,4,7,2,3,0,8,2,4,7,34,56,7,21,0,2,78,44567,32,1,234,554,22,43]
 
 function bubbleSort(arrayToSort) {
 
@@ -21,5 +21,30 @@ function bubbleSort(arrayToSort) {
   return array
 }
 
+function selectSort(arrayToSort){
+  const array = [...arrayToSort]
+  const arrangedArray = []
 
-console.log(bubbleSort(numbers))
+  while (array.length) {
+    let isSmallest = array[0]
+
+    for (let i = 0; i < array.length; i++) {
+      if (array[i] < isSmallest) {
+        isSmallest = array[i]
+      }
+    }
+
+    const indexOfSmallest = array.indexOf(isSmallest)
+    array.splice(indexOfSmallest,1)
+    arrangedArray.push(isSmallest)
+  }
+
+  return arrangedArray
+}
+
+console.log(selectSort(numbers))
+
+module.exports = {
+  selectSort,
+  bubbleSort
+}
