@@ -1,5 +1,6 @@
 import React from 'react'
 import Select from 'react-select'
+import getUid from 'get-uid'
 
 import Bar from './Bar'
 import sortingFunctions from './sortingFunctions'
@@ -25,7 +26,7 @@ class App extends React.Component {
     super(p)
 
     this.state = {
-      dataToSort: [],
+      data: [],
       dataPoints: 0,
       sortFunction: undefined,
       sortName: '',
@@ -34,7 +35,15 @@ class App extends React.Component {
 
     this.handleDataSelect = this.handleDataSelect.bind(this)
     this.handleSortSelect = this.handleSortSelect.bind(this)
+    this.handleSort = this.handleSort.bind(this)
+    this.onIteration = this.onIteration.bind(this)
 
+  }
+
+  onIteration(array){
+    this.setState({
+      data: array
+    })
   }
 
   handleSortSelect(e) {
@@ -58,25 +67,33 @@ class App extends React.Component {
 
   handleDataSelect(e) {
 
-    // this is due to React-Select when clearing the field
+    // this is due to React-Select when clearing the field it sends null rather than e
     if (!e) {
       this.setState({
-        dataToSort: [],
+        data: [],
         dataPoints: 0
       })
       return
     }
 
-    const dataToSort = []
+    const data = []
     for (let i = 0; i < e.value + 1; i++) {
       const randomNumber = Math.round(Math.random() * 500)
-      dataToSort.push(randomNumber)
+      data.push(randomNumber)
     }
 
     this.setState({
-      dataToSort,
+      data,
       dataPoints: e.value
     })
+  }
+
+  async handleSort(){
+    if (this.state.sortFunction && this.state.data && this.state.dataPoints){
+      this.state.sortFunction(this.state.data, this.onIteration)
+    } else {
+      alert("Please enter a sort method and add some data points")
+    }
   }
 
   render() {
@@ -113,7 +130,7 @@ class App extends React.Component {
               </div>
             </div>
             <div className="start-wrapper">
-              <button>Start Sort</button>
+              <button onClick={this.handleSort}>Start Sort</button>
             </div>
           </div>
           <div className="header-right">
@@ -124,7 +141,7 @@ class App extends React.Component {
           </div>
           <div className="graph-wrapper">
             {
-              this.state.dataToSort.map(number => <Bar height={number}/>)
+              this.state.data.map(number => <Bar height={number} key={getUid()}/>)
             }
           </div>
           <div className="body-right">

@@ -20,6 +20,21 @@ html, body, .app, #root {
   flex: 7;
 }
 
+.start-wrapper {
+  padding-right: 10px;
+}
+
+button {
+  background-color: hsl(0,0%,100%);
+  height: 38px;
+  width: 100%;
+  border-radius: 4px;
+  color: hsl(0,0%,50%);;
+  font-size: 16px;
+  padding-right: 10px;
+  font-family: inherit;
+}
+
 .graph-wrapper {
   display: flex;
   justify-content: center;
