@@ -1,27 +1,27 @@
-import React from 'react';
+import React from 'react'
 import Select from 'react-select'
 
 import Bar from './Bar'
 import sortingFunctions from './sortingFunctions'
-import './styles/App.css';
+import './styles/App.css'
 
 const dataPoints = [
-  {value: 5, label: "5"},
-  {value: 10, label: "10"},
-  {value: 25, label: "25"},
-  {value: 50, label: "50"},
-  {value: 100, label: "100"},
-  {value: 250, label: "250"},
+  { value: 5, label: '5' },
+  { value: 10, label: '10' },
+  { value: 25, label: '25' },
+  { value: 50, label: '50' },
+  { value: 100, label: '100' },
+  { value: 250, label: '250' },
 ]
 
 const sortMethod = [
-  {value:sortingFunctions.bubbleSort, label: "Bubble Sort"},
-  {value:sortingFunctions.selectSort, label: "Select Sort"}
+  { value: sortingFunctions.bubbleSort, label: 'Bubble Sort' },
+  { value: sortingFunctions.selectSort, label: 'Select Sort' }
 ]
 
 class App extends React.Component {
 
-  constructor(p){
+  constructor(p) {
     super(p)
 
     this.state = {
@@ -37,10 +37,18 @@ class App extends React.Component {
 
   }
 
-  handleSortSelect(e){
+  handleSortSelect(e) {
+    // this is due to React-Select when clearing the field it sends null rather than e
+    if (!e) {
+      this.setState({
+        sortFunction: undefined,
+        sortName: ''
+      })
+      return
+    }
 
-    const initialTrans = e.value.name.replace( /([A-Z])/g, " $1" );
-    const sortName = initialTrans.charAt(0).toUpperCase() + initialTrans.slice(1);
+    const initialTrans = e.value.name.replace(/([A-Z])/g, ' $1')
+    const sortName = initialTrans.charAt(0).toUpperCase() + initialTrans.slice(1)
 
     this.setState({
       sortFunction: e.value,
@@ -48,22 +56,30 @@ class App extends React.Component {
     })
   }
 
-  handleDataSelect(e){
+  handleDataSelect(e) {
+
+    // this is due to React-Select when clearing the field
+    if (!e) {
+      this.setState({
+        dataToSort: [],
+        dataPoints: 0
+      })
+      return
+    }
 
     const dataToSort = []
-
-    for (let i=0; i<e.value+1; i++ ){
-      const randomNumber = Math.round(Math.random()*500)
+    for (let i = 0; i < e.value + 1; i++) {
+      const randomNumber = Math.round(Math.random() * 500)
       dataToSort.push(randomNumber)
     }
 
     this.setState({
       dataToSort,
-      dataPoints:e.value
+      dataPoints: e.value
     })
   }
 
-  render (){
+  render() {
     return (
       <div className="app">
         <div className="header">
@@ -71,26 +87,28 @@ class App extends React.Component {
           </div>
           <div className="button-wrapper">
             <div className="sort-wrapper">
-              <div className="select-wrapper" style={{width:'100%'}}>
+              <div className="select-wrapper" style={{ width: '100%' }}>
                 <Select
-                  placeholder ="Sort Type"
-                  value ={
-                   this.state.sortName ? {label:this.state.sortName} : null
+                  placeholder="Sort Type"
+                  isClearable={true}
+                  value={
+                    this.state.sortName ? { label: this.state.sortName } : null
                   }
-                  onChange = {this.handleSortSelect}
-                  options ={sortMethod}
+                  onChange={this.handleSortSelect}
+                  options={sortMethod}
                 />
               </div>
             </div>
             <div className="data-points-wrapper">
-              <div className="select-wrapper" style={{width:'100%'}}>
+              <div className="select-wrapper" style={{ width: '100%' }}>
                 <Select
-                  placeholder ="Data Points"
-                  value ={
-                    this.state.dataPoints ? {label:this.state.dataPoints} : null
+                  placeholder="Data Points"
+                  isClearable={true}
+                  value={
+                    this.state.dataPoints ? { label: this.state.dataPoints } : null
                   }
-                  onChange = {this.handleDataSelect}
-                  options ={dataPoints}
+                  onChange={this.handleDataSelect}
+                  options={dataPoints}
                 />
               </div>
             </div>
@@ -113,9 +131,9 @@ class App extends React.Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 
 }
 
-export default App;
+export default App
