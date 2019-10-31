@@ -1,5 +1,3 @@
-const numbers = [2,4,7,2,3,0,8,2,4,7,34,56,7,21,0,2,78,44567,32,1,234,554,22,43]
-
 async function bubbleSort(arrayToSort, iterationCallback) {
 
   const array = [...arrayToSort]
@@ -23,40 +21,48 @@ async function bubbleSort(arrayToSort, iterationCallback) {
   return array
 }
 
-function selectSort(arrayToSort){
+
+async function selectSort(arrayToSort, iterationCallback){
   const array = [...arrayToSort]
-  const arrangedArray = []
 
-  while (array.length) {
-    let isSmallest = array[0]
+  for (let i=0; i<array.length-1; i++){
+    let isSmallest = array[i]
+    let smallestPos = 0
 
-    for (let i = 0; i < array.length; i++) {
-      if (array[i] < isSmallest) {
-        isSmallest = array[i]
+    for (let a = i+1; a < array.length; a++) {
+      if (array[a] < isSmallest) {
+        isSmallest = array[a]
+        smallestPos = a
       }
     }
 
-    const indexOfSmallest = array.indexOf(isSmallest)
-    array.splice(indexOfSmallest,1)
-    arrangedArray.push(isSmallest)
+    if (smallestPos === 0) {
+      iterationCallback(array)
+      await delay()
+    } else {
+      array.splice(smallestPos,1) // removes one element at index smallestPos
+      array.splice(i,0,isSmallest) // inserts at index i
+      iterationCallback(array)
+      await delay()
+    }
+
   }
 
-  return arrangedArray
+  return array
 }
 
-console.log(selectSort(numbers))
 
 module.exports = {
   selectSort,
   bubbleSort
 }
 
-function delay(){
-  return new Promise(function(resolve, reject){
+function delay() {
+  return new Promise(function (resolve, reject) {
 
-    setTimeout(()=>{
+    setTimeout(() => {
       resolve()
-    }, 10)
+    }, 250)
 
   })
 }

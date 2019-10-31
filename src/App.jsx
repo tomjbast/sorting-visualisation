@@ -77,7 +77,7 @@ class App extends React.Component {
     }
 
     const data = []
-    for (let i = 0; i < e.value + 1; i++) {
+    for (let i = 0; i < e.value; i++) {
       const randomNumber = Math.round(Math.random() * 500)
       data.push(randomNumber)
     }
