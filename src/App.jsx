@@ -17,7 +17,8 @@ const dataPoints = [
 
 const sortMethod = [
   { value: sortingFunctions.bubbleSort, label: 'Bubble Sort' },
-  { value: sortingFunctions.selectSort, label: 'Select Sort' }
+  { value: sortingFunctions.selectSort, label: 'Select Sort' },
+  { value: sortingFunctions.quickSort, label: 'Quick Sort' }
 ]
 
 class App extends React.Component {
@@ -85,6 +86,11 @@ class App extends React.Component {
     this.setState({
       data,
       dataPoints: e.value
+    }, () => {
+      const middleElement = (Math.round(this.state.data.length/2))- 1
+      let piv = this.state.data[middleElement]
+
+      console.log(piv)
     })
   }
 
