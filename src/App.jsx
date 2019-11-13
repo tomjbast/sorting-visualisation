@@ -18,7 +18,8 @@ const dataPoints = [
 const sortMethod = [
   { value: sortingFunctions.bubbleSort, label: 'Bubble Sort' },
   { value: sortingFunctions.selectSort, label: 'Select Sort' },
-  { value: sortingFunctions.quickSort, label: 'Quick Sort' }
+  { value: sortingFunctions.quickSort, label: 'Quick Sort' },
+  { value: sortingFunctions.insertionSort, label: 'Insertion Sort' }
 ]
 
 class App extends React.Component {
