@@ -114,7 +114,7 @@ class App extends React.Component {
       if (this.state.sortFunction && this.state.data && this.state.dataPoints){
         this.state.sortFunction(this.state.data, this.onIteration)
       } else {
-        alert("Please enter a sort method and data points")
+        alert("Please enter a sort method and number of data points")
       }
     })
   }
