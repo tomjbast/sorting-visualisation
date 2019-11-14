@@ -7,7 +7,6 @@ import sortingFunctions from './sortingFunctions'
 import './styles/App.css'
 
 const dataPoints = [
-  { value: 5, label: '5' },
   { value: 10, label: '10' },
   { value: 25, label: '25' },
   { value: 50, label: '50' },
@@ -18,7 +17,8 @@ const dataPoints = [
 const sortMethod = [
   { value: sortingFunctions.bubbleSort, label: 'Bubble Sort' },
   { value: sortingFunctions.selectSort, label: 'Select Sort' },
-  { value: sortingFunctions.quickSort, label: 'Quick Sort' }
+  { value: sortingFunctions.quickSort, label: 'Quick Sort' },
+  { value: sortingFunctions.insertionSort, label: 'Insertion Sort' }
 ]
 
 class App extends React.Component {
@@ -27,6 +27,7 @@ class App extends React.Component {
     super(p)
 
     this.state = {
+      sort:false,
       data: [],
       dataPoints: 0,
       sortFunction: undefined,
@@ -37,6 +38,7 @@ class App extends React.Component {
     this.handleDataSelect = this.handleDataSelect.bind(this)
     this.handleSortSelect = this.handleSortSelect.bind(this)
     this.handleSort = this.handleSort.bind(this)
+    this.handleStopSort = this.handleStopSort.bind(this)
     this.onIteration = this.onIteration.bind(this)
 
   }
@@ -45,7 +47,18 @@ class App extends React.Component {
     this.setState({
       data: array
     })
+
+    return this.state.sort;
   }
+
+  // delay() {
+  //   return new Promise(function (resolve, reject) {
+  //     setTimeout(() => {
+  //       resolve()
+  //     }, 200)
+  //
+  //   })
+  // }
 
   handleSortSelect(e) {
     // this is due to React-Select when clearing the field it sends null rather than e
@@ -94,12 +107,22 @@ class App extends React.Component {
     })
   }
 
-  async handleSort(){
-    if (this.state.sortFunction && this.state.data && this.state.dataPoints){
-      this.state.sortFunction(this.state.data, this.onIteration)
-    } else {
-      alert("Please enter a sort method and add some data points")
-    }
+  handleSort(){
+    this.setState({
+      sort: true
+    }, () => {
+      if (this.state.sortFunction && this.state.data && this.state.dataPoints){
+        this.state.sortFunction(this.state.data, this.onIteration)
+      } else {
+        alert("Please enter a sort method and data points")
+      }
+    })
+  }
+
+  handleStopSort(){
+    this.setState({
+      sort: false
+    })
   }
 
   render() {
@@ -137,6 +160,9 @@ class App extends React.Component {
             </div>
             <div className="start-wrapper">
               <button onClick={this.handleSort}>Start Sort</button>
+            </div>
+            <div className="stop-wrapper">
+              <button onClick={this.handleStopSort}>Stop Sort</button>
             </div>
           </div>
           <div className="header-right">
