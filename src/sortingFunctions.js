@@ -1,4 +1,4 @@
-async function bubbleSort(arrayToSort, iterationCallback) {
+export async function bubbleSort(arrayToSort, iterationCallback) {
 
   const array = [...arrayToSort]
   for (let i = 0; i < array.length - 1; i++) {
@@ -13,7 +13,7 @@ async function bubbleSort(arrayToSort, iterationCallback) {
 
 }
 
-async function selectSort(arrayToSort, iterationCallback) {
+export async function selectSort(arrayToSort, iterationCallback) {
   const array = [...arrayToSort]
 
   for (let i = 0; i < array.length - 1; i++) {
@@ -42,7 +42,7 @@ async function selectSort(arrayToSort, iterationCallback) {
   }
 }
 
-async function insertionSort(arrayToSort,iterationCallback){ //arrayToSort, iterationCallback
+export async function insertionSort(arrayToSort,iterationCallback){ //arrayToSort, iterationCallback
   const array = [...arrayToSort]
 
   for (let i = 1; i<array.length; i++){
@@ -60,7 +60,7 @@ async function insertionSort(arrayToSort,iterationCallback){ //arrayToSort, iter
   }
 }
 
-async function quickSort(arrayToSort, iterationCallback){
+export async function quickSort(arrayToSort, iterationCallback){
   const array = [...arrayToSort]
 
   const doQuickSort = async (leftIndex, rightIndex) => {
@@ -120,7 +120,7 @@ function delay() {
   })
 }
 
-async function swap(leftIndex, rightIndex, array, iterationCallback){
+export async function swap(leftIndex, rightIndex, array, iterationCallback){
 
   if (leftIndex !== rightIndex) {
     const holdVal = array[leftIndex]
@@ -133,7 +133,7 @@ async function swap(leftIndex, rightIndex, array, iterationCallback){
 
 }
 
-module.exports = {
+export default {
   selectSort,
   bubbleSort,
   quickSort,
