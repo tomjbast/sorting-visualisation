@@ -38,6 +38,7 @@ button {
 .graph-wrapper {
   display: flex;
   justify-content: center;
+  flex: 3;
 }
 
 .bar {
@@ -52,22 +53,24 @@ button {
   height: 100%;
   display: flex;
   justify-content: center;
+  flex: 3;
 }
 
 .select-wrapper {
   padding-right: 10px;
 }
 
-.sort-wrapper, .data-points-wrapper, .start-wrapper {
+.sort-wrapper, .data-points-wrapper, .start-wrapper, .stop-wrapper {
   display: flex;
   flex: 1;
   align-items: flex-end;
 }
 
-.header-left, .header-right, .button-wrapper {
-  flex: 1;
+.header-left, .header-right{
+  flex: 2;
 }
 
-.body-left, .body-right, .graph-wrapper {
-  flex: 1;
+.body-left, .body-right {
+  flex: 2;
 }
+

@@ -1,13 +1,13 @@
 async function bubbleSort(arrayToSort, iterationCallback) {
 
   const array = [...arrayToSort]
-
   for (let i = 0; i < array.length - 1; i++) {
     for (let i = 0; i < array.length - 1; i++) {
       if (array[i] > array[i + 1]) {
-        await swap(i,i+1,array,iterationCallback) // this allows the users to see whats going on, also has a nice side effect of giving setState time to resolve
+        if (!(await swap(i,i+1,array,iterationCallback))){
+          return
+        }
       }
-
     }
   }
 
@@ -32,8 +32,11 @@ async function selectSort(arrayToSort, iterationCallback) {
     } else {
       array.splice(smallestPos, 1) // removes one element at index smallestPos
       array.splice(i, 0, isSmallest) // inserts at index i
-      iterationCallback(array)
       await delay()
+      if(!(iterationCallback(array))){
+        return
+      }
+      //await delay()
     }
 
   }
@@ -46,7 +49,9 @@ async function insertionSort(arrayToSort,iterationCallback){ //arrayToSort, iter
     if (array[i] < array[i-1]){
       for(let j=i-1;j>=0;j--){
         if(array[j] > array[j+1]){
-          await swap(j,j+1,array,iterationCallback)
+          if(!(await swap(j,j+1,array,iterationCallback))){
+            return
+          }
         } else {
           break
         }
@@ -68,7 +73,11 @@ async function quickSort(arrayToSort, iterationCallback){
     const pivotIndex = leftIndex + Math.round(subArrayLength/2)
     const pivot = array[pivotIndex]
 
-    await swap(leftIndex, pivotIndex, array, iterationCallback)
+    //await swap(leftIndex, pivotIndex, array, iterationCallback)
+
+    if (!(await swap(leftIndex,pivotIndex,array,iterationCallback))){
+      return
+    }
 
     // start a loop at array[1] move less than pivot value to left
     // then swap highest low value with pivot
@@ -78,7 +87,11 @@ async function quickSort(arrayToSort, iterationCallback){
     for (let i = leftIndex+1; i< rightIndex; i++){
 
       if (array[i] < pivot){
-        await swap(i, highSwapCandidate, array, iterationCallback)
+        if (!(await swap(i, highSwapCandidate,array,iterationCallback))){
+          debugger
+          return
+        }
+        //await swap(i, highSwapCandidate, array, iterationCallback)
         highSwapCandidate++
       }
     }
@@ -109,15 +122,15 @@ function delay() {
 
 async function swap(leftIndex, rightIndex, array, iterationCallback){
 
-  if (leftIndex === rightIndex) {
-    return
+  if (leftIndex !== rightIndex) {
+    const holdVal = array[leftIndex]
+    array[leftIndex] = array[rightIndex]
+    array[rightIndex] = holdVal
+    await delay()
   }
 
-  const holdVal = array[leftIndex]
-  array[leftIndex] = array[rightIndex]
-  array[rightIndex] = holdVal
-  iterationCallback(array)
-  await delay()
+  return iterationCallback(array)
+
 }
 
 module.exports = {
