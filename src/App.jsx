@@ -44,21 +44,15 @@ class App extends React.Component {
   }
 
   onIteration(array){
+
+    if (!this.state.sort) return this.state.sort
+
     this.setState({
       data: array
     })
 
     return this.state.sort;
   }
-
-  // delay() {
-  //   return new Promise(function (resolve, reject) {
-  //     setTimeout(() => {
-  //       resolve()
-  //     }, 200)
-  //
-  //   })
-  // }
 
   handleSortSelect(e) {
     // this is due to React-Select when clearing the field it sends null rather than e
@@ -90,21 +84,22 @@ class App extends React.Component {
       return
     }
 
-    const data = []
-    for (let i = 0; i < e.value; i++) {
-      const randomNumber = Math.round(Math.random() * 500)
-      data.push(randomNumber)
-    }
-
     this.setState({
-      data,
-      dataPoints: e.value
+      sort: false
     }, () => {
-      const middleElement = (Math.round(this.state.data.length/2))- 1
-      let piv = this.state.data[middleElement]
+      const data = []
+      for (let i = 0; i < e.value; i++) {
+        const randomNumber = Math.round(Math.random() * 500)
+        data.push(randomNumber)
+      }
 
-      console.log(piv)
+      this.setState({
+        data,
+        dataPoints: e.value
+      })
+
     })
+
   }
 
   handleSort(){
@@ -136,6 +131,7 @@ class App extends React.Component {
               <div className="select-wrapper" style={{ width: '100%' }}>
                 <Select
                   placeholder="Sort Type"
+                  inputProps={{readOnly:true}}
                   isClearable={true}
                   value={
                     this.state.sortName ? { label: this.state.sortName } : null
@@ -149,6 +145,7 @@ class App extends React.Component {
               <div className="select-wrapper" style={{ width: '100%' }}>
                 <Select
                   placeholder="Data Points"
+                  inputProps={{readOnly:true}}
                   isClearable={true}
                   value={
                     this.state.dataPoints ? { label: this.state.dataPoints } : null
