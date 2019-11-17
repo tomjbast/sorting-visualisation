@@ -10,9 +10,8 @@ html, body, .app, #root {
 
 .header {
   display: flex;
-  flex: 1;
-  padding-bottom: 10px;
   background-color: #000088;
+  padding: 20px 70px;
 }
 
 .body {
@@ -39,6 +38,8 @@ button {
   display: flex;
   justify-content: center;
   flex: 3;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .bar {
@@ -51,9 +52,10 @@ button {
 
 .button-wrapper {
   height: 100%;
+  width: 100%;
   display: flex;
+  flex-direction:column;
   justify-content: center;
-  flex: 3;
 }
 
 .select-wrapper {
@@ -61,16 +63,62 @@ button {
 }
 
 .sort-wrapper, .data-points-wrapper, .start-wrapper, .stop-wrapper {
-  display: flex;
-  flex: 1;
-  align-items: flex-end;
+  padding: 5px;
+  /*flex: 1;*/
+  /*align-items: flex-end;*/
 }
 
 .header-left, .header-right{
-  flex: 2;
+  display: none;
 }
 
 .body-left, .body-right {
-  flex: 2;
+  display: none;
 }
 
+@media (min-width: 768px) {
+
+  /*.header {*/
+  /*  display: flex;*/
+  /*  background-color: #000088;*/
+  /*  padding: 20px 70px;*/
+  /*}*/
+
+  .header {
+    padding: 20px 0;
+  }
+
+  .button-wrapper{
+    flex: 8;
+    flex-direction: row;
+  }
+
+  .header-left, .header-right{
+    display: flex;
+    flex: 2;
+  }
+
+  .body-left, .body-right {
+    display: flex;
+    flex: 2;
+  }
+
+  .graph-wrapper {
+    flex: 8;
+    padding: 0;
+  }
+
+  .data-inputs, .user-select{
+    display: flex;
+    width: 100%;
+    align-items: center;
+  }
+
+  .sort-wrapper, .data-points-wrapper, .start-wrapper, .stop-wrapper {
+    width:100%;
+    /*padding: 5px;*/
+    /*flex: 1;*/
+    align-items: flex-end;
+  }
+
+}

@@ -1,6 +1,7 @@
 import React from 'react'
 import Select from 'react-select'
 import getUid from 'get-uid'
+import {isMobile} from 'react-device-detect'
 
 import Bar from './Bar'
 import sortingFunctions from './sortingFunctions'
@@ -13,6 +14,10 @@ const dataPoints = [
   { value: 100, label: '100' },
   { value: 250, label: '250' },
 ]
+
+if (isMobile) {
+  dataPoints.pop()
+}
 
 const sortMethod = [
   { value: sortingFunctions.bubbleSort, label: 'Bubble Sort' },
@@ -121,45 +126,53 @@ class App extends React.Component {
   }
 
   render() {
+    function isMobileDevice() {
+      return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+    }
+    console.log(isMobileDevice())
     return (
       <div className="app">
         <div className="header">
           <div className="header-left">
           </div>
           <div className="button-wrapper">
-            <div className="sort-wrapper">
-              <div className="select-wrapper" style={{ width: '100%' }}>
-                <Select
-                  placeholder="Sort Type"
-                  inputProps={{readOnly:true}}
-                  isClearable={true}
-                  value={
-                    this.state.sortName ? { label: this.state.sortName } : null
-                  }
-                  onChange={this.handleSortSelect}
-                  options={sortMethod}
-                />
+            <div className="data-inputs">
+              <div className="sort-wrapper">
+                <div className="select-wrapper" style={{ width: '100%' }}>
+                  <Select
+                    placeholder="Sort Type"
+                    inputProps={{readOnly:true}}
+                    isClearable={true}
+                    value={
+                      this.state.sortName ? { label: this.state.sortName } : null
+                    }
+                    onChange={this.handleSortSelect}
+                    options={sortMethod}
+                  />
+                </div>
+              </div>
+              <div className="data-points-wrapper">
+                <div className="select-wrapper" style={{ width: '100%' }}>
+                  <Select
+                    placeholder="Data Points"
+                    inputProps={{readOnly:true}}
+                    isClearable={true}
+                    value={
+                      this.state.dataPoints ? { label: this.state.dataPoints } : null
+                    }
+                    onChange={this.handleDataSelect}
+                    options={dataPoints}
+                  />
+                </div>
               </div>
             </div>
-            <div className="data-points-wrapper">
-              <div className="select-wrapper" style={{ width: '100%' }}>
-                <Select
-                  placeholder="Data Points"
-                  inputProps={{readOnly:true}}
-                  isClearable={true}
-                  value={
-                    this.state.dataPoints ? { label: this.state.dataPoints } : null
-                  }
-                  onChange={this.handleDataSelect}
-                  options={dataPoints}
-                />
+            <div className="user-select">
+              <div className="start-wrapper">
+                <button onClick={this.handleSort}>Start Sort</button>
               </div>
-            </div>
-            <div className="start-wrapper">
-              <button onClick={this.handleSort}>Start Sort</button>
-            </div>
-            <div className="stop-wrapper">
-              <button onClick={this.handleStopSort}>Stop Sort</button>
+              <div className="stop-wrapper">
+                <button onClick={this.handleStopSort}>Stop Sort</button>
+              </div>
             </div>
           </div>
           <div className="header-right">
