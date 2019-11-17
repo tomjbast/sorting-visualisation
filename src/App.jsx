@@ -141,7 +141,7 @@ class App extends React.Component {
                 <div className="select-wrapper" style={{ width: '100%' }}>
                   <Select
                     placeholder="Sort Type"
-                    inputProps={{readOnly:true}}
+                    isSearchable={false}
                     isClearable={true}
                     value={
                       this.state.sortName ? { label: this.state.sortName } : null
@@ -155,7 +155,7 @@ class App extends React.Component {
                 <div className="select-wrapper" style={{ width: '100%' }}>
                   <Select
                     placeholder="Data Points"
-                    inputProps={{readOnly:true}}
+                    isSearchable={false}
                     isClearable={true}
                     value={
                       this.state.dataPoints ? { label: this.state.dataPoints } : null
