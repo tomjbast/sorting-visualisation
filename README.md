@@ -1,68 +1,34 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
 
-In the project directory, you can run:
 
-### `npm start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Sorting Visualisation
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+I wanted to start this small project to achieve a couple of things:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+* Learn about some popular sorting algorithms
+* Implement said algorithms (with no stack overflow etc "cheating")
+* Develop a highly visual tool anyone could have a quick play with - [sort-visualisation.co.uk](sort-visualisation.co.uk)
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## What it is
 
-## Learn More
+This is a simple front end application built using create-react-app that allows users to choose a sorting method, a number of data points and to start/stop the sort. The Github repo can be found [here](https://github.com/tomjbast/sorting-visualisation). I'd love any feedback and suggestions
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+It uses Buddy for continuous integration and is deployed from S3 while being delivered by CloudFront and AWS Route 53; the application website can be found [here](sort-visualisation.co.uk) 
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Process/Learnings
 
-### Code Splitting
+Before I went in I wanted to make sure I wasn't relying on external help too much so made the decision to avoid any copy/paste code or even looking at online solutions. 
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+Quick sort was by far the most difficult and was my first real exposure to recursive functions, however it didn't prove unbeatable and I got there in the end. 
 
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Overall it was great to dig into sorting a little more and have some understanding of what goes on behind the simple .sort() functionality of javascript. Next steps would probably be to outsource the sorting of a large array to multiple nodes using quick sort to "get around" javascripts single threaded nature. 

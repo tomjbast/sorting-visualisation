@@ -81,8 +81,9 @@ button {
 	}
 
 	.button-wrapper {
-		flex: 8;
-		flex-direction: row;
+		flex: 1;
+		display: flex;
+		flex-direction: column;
 	}
 
 	.header-left, .header-right {
