@@ -1,7 +1,7 @@
 import React from 'react'
 import Select from 'react-select'
 import getUid from 'get-uid'
-import {isMobile} from 'react-device-detect'
+import { isMobile } from 'react-device-detect'
 
 import Bar from './Bar'
 import sortingFunctions from './sortingFunctions'
@@ -32,12 +32,11 @@ class App extends React.Component {
     super(p)
 
     this.state = {
-      sort:false,
+      sort: false,
       data: [],
       dataPoints: 0,
       sortFunction: undefined,
       sortName: '',
-      ascending: true
     }
 
     this.handleDataSelect = this.handleDataSelect.bind(this)
@@ -48,7 +47,7 @@ class App extends React.Component {
 
   }
 
-  onIteration(array){
+  onIteration(array) {
 
     if (!this.state.sort) return this.state.sort
 
@@ -56,7 +55,7 @@ class App extends React.Component {
       data: array
     })
 
-    return this.state.sort;
+    return this.state.sort
   }
 
   handleSortSelect(e) {
@@ -107,19 +106,19 @@ class App extends React.Component {
 
   }
 
-  handleSort(){
+  handleSort() {
     this.setState({
       sort: true
     }, () => {
-      if (this.state.sortFunction && this.state.data && this.state.dataPoints){
+      if (this.state.sortFunction && this.state.data && this.state.dataPoints) {
         this.state.sortFunction(this.state.data, this.onIteration)
       } else {
-        alert("Please enter a sort method and number of data points")
+        alert('Please enter a sort method and number of data points')
       }
     })
   }
 
-  handleStopSort(){
+  handleStopSort() {
     this.setState({
       sort: false
     })
@@ -127,8 +126,9 @@ class App extends React.Component {
 
   render() {
     function isMobileDevice() {
-      return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+      return (typeof window.orientation !== 'undefined') || (navigator.userAgent.indexOf('IEMobile') !== -1)
     }
+
     console.log(isMobileDevice())
     return (
       <div className="app">
