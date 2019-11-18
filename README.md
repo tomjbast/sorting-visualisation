@@ -1,15 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
 ## Sorting Visualisation
 
 I wanted to start this small project to achieve a couple of things:
