@@ -168,7 +168,7 @@ class App extends React.Component {
             </div>
             <div className="user-select">
               <div className="start-wrapper">
-                <button onClick={this.handleSort}>Start Sort</button>
+                <button disabled={this.state.sort} onClick={this.handleSort}>Start Sort</button>
               </div>
               <div className="stop-wrapper">
                 <button onClick={this.handleStopSort}>Stop Sort</button>
